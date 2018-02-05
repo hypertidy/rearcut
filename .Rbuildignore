@@ -1,3 +1,4 @@
 ^rearcut\.Rproj$
 ^\.Rproj\.user$
 ^data-raw$
+^README\.Rmd$
