@@ -1,0 +1,29 @@
+commit b7bc0d2af2e078301a0a4a32a5b87b9b75b50f3e
+Author: mrgreywater <mr.greywater@googlemail.com>
+Date:   Wed Oct 25 14:31:22 2017 +0200
+
+    viz: use color scheme of earcut.js
+
+commit aa65e6471719564d78cc35148773c66b24bf2ffd
+Author: mrgreywater <mr.greywater@googlemail.com>
+Date:   Sun Oct 22 22:05:33 2017 +0200
+
+    viz: add antialiasing, reduce zoom artifacts
+
+commit eed119e1087ed6b323671cc6492e4f0d4f8ea4df
+Author: mrgreywater <mr.greywater@googlemail.com>
+Date:   Sun Oct 22 05:05:54 2017 +0200
+
+    viz: add viewport transformation (scaling/translation)
+
+commit c06b0e13cf8eee1c30ccda12f9ad7fd309ed0fbe
+Author: mrgreywater <mr.greywater@googlemail.com>
+Date:   Sat Oct 21 23:46:56 2017 +0200
+
+    no exceptions on coverage
+
+commit 2baadc17384fc34cd25d65596ddcf9b76c9dc1d9
+Author: mrgreywater <mr.greywater@googlemail.com>
+Date:   Sat Oct 21 10:49:45 2017 +0200
+
+    viz: add scanline-fill as ground truth

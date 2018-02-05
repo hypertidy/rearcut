@@ -1,0 +1,9 @@
+#https://raw.githubusercontent.com/mapbox/earcut.hpp/master/include/mapbox/earcut.hpp
+
+system("
+       cd data-raw
+       #git clone https://github.com/mapbox/earcut.hpp
+       cp earcut.hpp/include/mapbox/earcut.hpp ../src/
+       cd earcut.hpp
+       git log -n 5  >  ../mapbox-earcut.hpp.git.log
+       ")
