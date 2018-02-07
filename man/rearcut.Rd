@@ -25,7 +25,7 @@ X <- c(0, 0, 0.75, 1, 0.5, 0.8, 0.69, 0)
 Y <- c(0, 1, 1, 0.8, 0.7, 0.6, 0, 0)
 ind <- rearcut(X, Y)  ## should be longer than 0 :)
 if (length(ind) < 3) {
- // this is rgl's solution, it's not necessarily deterministic
+ ## this is rgl's solution, it's not necessarily deterministic
  ind <- c(8L, 2L, 1L, 8L, 5L, 2L, 8L, 7L, 5L, 5L, 3L, 2L, 5L,
               4L, 3L, 7L, 6L, 5L) - 1
 }

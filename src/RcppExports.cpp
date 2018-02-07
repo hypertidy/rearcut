@@ -5,6 +5,18 @@
 
 using namespace Rcpp;
 
+// P_d
+IntegerVector P_d(NumericVector x, NumericVector y);
+RcppExport SEXP _rearcut_P_d(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(P_d(x, y));
+    return rcpp_result_gen;
+END_RCPP
+}
 // rearcut
 IntegerVector rearcut(NumericVector x, NumericVector y);
 RcppExport SEXP _rearcut_rearcut(SEXP xSEXP, SEXP ySEXP) {
@@ -16,14 +28,4 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(rearcut(x, y));
     return rcpp_result_gen;
 END_RCPP
-}
-
-static const R_CallMethodDef CallEntries[] = {
-    {"_rearcut_rearcut", (DL_FUNC) &_rearcut_rearcut, 2},
-    {NULL, NULL, 0}
-};
-
-RcppExport void R_init_rearcut(DllInfo *dll) {
-    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
-    R_useDynamicSymbols(dll, FALSE);
 }
