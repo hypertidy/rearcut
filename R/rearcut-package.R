@@ -3,7 +3,7 @@
 
 #' rearcut
 #' R port of Mabbox earcut.
-#' @name rearcut
+#' @name rearcut-package
 #' @docType data
 NULL
 
@@ -31,12 +31,13 @@ get_tri <- function(x, y, holes = NULL) {
     ct$eval(sprintf("var triangles = earcut(%s);", tojxy(x, y)))
 
   } else {
-    ct$eval(sprintf("var triangles = earcut(%s, %s);", tojxy(x, y), toj(holes)))
+    ## convert to Js 0-based index here
+    ct$eval(sprintf("var triangles = earcut(%s, %s);", tojxy(x, y), toj(holes - 1L)))
 
   }
   ct$get("triangles") + 1L
 }
-
+#' @importFrom graphics plot polygon
 plot_tri <- function(x, y, tri, ...) {
   xy <- cbind(x, y)
   plot(xy, pch = ".")
@@ -49,6 +50,7 @@ plot_tri <- function(x, y, tri, ...) {
 #' Ear cutting for polygons, a method for constrained triangulation.
 #'
 #' @param x object to triangulate, any convertible to silicate PATH
+#' @param holes 1-based index indicating where hole/s begin
 #' @param ... arguments passed to methods
 #'
 #' @return index triplets of triangles from vertex pool

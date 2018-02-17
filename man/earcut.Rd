@@ -4,18 +4,16 @@
 \alias{earcut}
 \alias{earcut}
 \alias{earcut.default}
-\alias{earcut}
-\alias{earcut.PATH}
 \title{Ear cut algorithm}
 \usage{
 earcut(x, holes = NULL...)
 
 \method{earcut}{default}(x, holes = NULL, ...)
-
-\method{earcut}{PATH}(x, ...)
 }
 \arguments{
 \item{x}{object to triangulate, any convertible to silicate PATH}
+
+\item{holes}{1-based index indicating where hole/s begin}
 
 \item{...}{arguments passed to methods}
 }
