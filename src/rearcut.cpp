@@ -35,7 +35,12 @@ IntegerVector rearcut(NumericVector x, NumericVector y) {
 
   std::vector<std::vector<Point>> polygon;
   // ... fill polygon structure with actual data
+  Point p = Point({1.1, 2.2});
+
   for (int ipoint = 0; ipoint < x.length(); ipoint++){
+    p = Point({1.1, 2.2});
+    polygon[0] = p;
+
     // I don't see how to make this vector :)
     //polygon.push_back( std::make_pair( Point(x[ipoint], y[ipoint]), ipoint) );
   }
