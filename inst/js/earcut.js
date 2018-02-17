@@ -1,0 +1,1 @@
+global.earcut = require('earcut');

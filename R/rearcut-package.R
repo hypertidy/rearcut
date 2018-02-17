@@ -6,3 +6,62 @@
 #' @name rearcut
 #' @docType data
 NULL
+
+
+#' @importFrom V8 v8
+load_earcut <- function() {
+  ct <- V8::v8()
+  ## load up the bunde
+  ct$source(system.file("js/earcutbundle.js", package = "rearcut"))
+  ct
+}
+
+## numbers to json
+toj <- function(x) {
+  sprintf("[%s]", paste(x, collapse = ", "))
+}
+## x,y numbers to json
+tojxy <- function(x, y) {
+  sprintf("[%s]", paste(paste(x, y, sep = ","), collapse = ", "))
+}
+## run earcut
+get_tri <- function(x, y, holes = NULL) {
+  ct <- load_earcut()
+  if (is.null(holes)) {
+    ct$eval(sprintf("var triangles = earcut(%s);", tojxy(x, y)))
+
+  } else {
+    ct$eval(sprintf("var triangles = earcut(%s, %s);", tojxy(x, y), toj(holes)))
+
+  }
+  ct$get("triangles") + 1L
+}
+
+plot_tri <- function(x, y, tri, ...) {
+  xy <- cbind(x, y)
+  plot(xy, pch = ".")
+
+  apply(matrix(tri, nrow = 3), 2, function(a) polygon(xy[a, ], ...))
+}
+
+#' Ear cut algorithm
+#'
+#' Ear cutting for polygons, a method for constrained triangulation.
+#'
+#' @param x object to triangulate, any convertible to silicate PATH
+#' @param ... arguments passed to methods
+#'
+#' @return index triplets of triangles from vertex pool
+#' @export
+earcut <- function(x, holes = NULL...) {
+  UseMethod("earcut")
+}
+#' @importFrom grDevices xy.coords
+#' @name earcut
+#' @export
+earcut.default <- function(x, holes = NULL, ...) {
+  xy <- grDevices::xy.coords(x)
+  get_tri(xy$x, xy$y, holes = holes)
+}
+
+
