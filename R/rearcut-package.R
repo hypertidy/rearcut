@@ -55,7 +55,7 @@ plot_tri <- function(x, y, tri, ...) {
 #'
 #' @return index triplets of triangles from vertex pool
 #' @export
-earcut <- function(x, holes = NULL...) {
+earcut <- function(x, holes = NULL, ...) {
   UseMethod("earcut")
 }
 #' @importFrom grDevices xy.coords

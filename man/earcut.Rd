@@ -6,7 +6,7 @@
 \alias{earcut.default}
 \title{Ear cut algorithm}
 \usage{
-earcut(x, holes = NULL...)
+earcut(x, holes = NULL, ...)
 
 \method{earcut}{default}(x, holes = NULL, ...)
 }
