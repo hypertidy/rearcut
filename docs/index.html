@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Constrained Triangulation of Polygons by 'Ear Clipping (Cutting)' • rearcut</title>
+<title>Constrained Triangulation of Polygons by 'Ear Clipping/Cutting' • rearcut</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
@@ -68,7 +68,7 @@
 x &lt;-<span class="st"> </span><span class="kw">c</span>(.<span class="dv">1</span>, .<span class="dv">1</span>, .<span class="dv">9</span>, .<span class="dv">9</span>, .<span class="dv">2</span>, .<span class="dv">2</span>, .<span class="dv">8</span>, .<span class="dv">8</span>)
 y &lt;-<span class="st"> </span><span class="kw">c</span>(.<span class="dv">1</span>, .<span class="dv">9</span>, .<span class="dv">9</span>, .<span class="dv">1</span>, .<span class="dv">2</span>, .<span class="dv">8</span>, .<span class="dv">8</span>, .<span class="dv">2</span>)
 <span class="kw">library</span>(rearcut)
-ind &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/rearcut/topics/earcut">earcut</a></span>(<span class="kw">cbind</span>(x, y), <span class="dt">holes =</span> 5L)
+ind &lt;-<span class="st"> </span><span class="kw">earcut</span>(<span class="kw">cbind</span>(x, y), <span class="dt">holes =</span> 5L)
 rearcut<span class="op">:::</span><span class="kw">plot_tri</span>(x, y, ind, <span class="dt">col =</span> <span class="st">"grey"</span>)</code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-1-1.png" width="100%"></p>
 <pre><code>#&gt; NULL</code></pre>
@@ -88,7 +88,7 @@ x &lt;-<span class="st"> </span>jsonlite<span class="op">::</span><span class="k
 
 
 x &lt;-<span class="st"> </span>x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(poly <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)
-tri &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/rearcut/topics/earcut">earcut</a></span>(x[<span class="kw">c</span>(<span class="st">"V1"</span>, <span class="st">"V2"</span>)])
+tri &lt;-<span class="st"> </span><span class="kw">earcut</span>(x[<span class="kw">c</span>(<span class="st">"V1"</span>, <span class="st">"V2"</span>)])
 rearcut<span class="op">:::</span><span class="kw">plot_tri</span>(x<span class="op">$</span>V1, x<span class="op">$</span>V2, tri)</code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-2-1.png" width="100%"></p>
 <pre><code>#&gt; NULL</code></pre>
@@ -107,7 +107,7 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2 class="hasAnchor">
 <a href="#sidebar" class="anchor"></a>License</h2>
-<p><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a> + <a href="LICENSE.html">LICENSE</a></p>
+<p><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE.html">LICENSE</a></p>
 <h2>Developers</h2>
 <ul class="list-unstyled">
 <li>Michael Sumner <br><small class="roles"> Author, maintainer </small> </li>
