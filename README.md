@@ -5,13 +5,34 @@
 rearcut
 =======
 
-The goal of rearcut is to triangulate polygons using the [Ear clipping algorithm](https://en.wikipedia.org/wiki/Polygon_triangulation#Ear_clipping_method). This is also referred to as [ear cutting](http://cgm.cs.mcgill.ca/~godfried/teaching/cg-projects/97/Ian/cutting_ears.html) and this package directly uses the [Mapbox Javascript library earcut](https://github.com/mapbox/earcut).
+The goal of rearcut is to triangulate polygons using the [Ear clipping algorithm](https://en.wikipedia.org/wiki/Polygon_triangulation#Ear_clipping_method). This is also referred to as [ear cutting](http://cgm.cs.mcgill.ca/~godfried/teaching/cg-projects/97/Ian/cutting_ears.html) and this package directly uses the Mapbox Javascript library [earcut](https://github.com/mapbox/earcut).
 
 The original motivation for rearcut is to triangulate polygons for [silicate](https://github.com/hypertidy/silicate.git).
 
 A polygon and one of its possible triangulations by ear clipping.
 
-[silicate](https://github.com/hypertidy/silicate.git).
+``` r
+library(rearcut)
+minpoly_xy <- na.omit(minpoly)
+nas <- which(is.na(minpoly$x_))
+## this is the "indicate where holes start" convention
+hole_index <- nas - (seq_along(nas) - 1)
+op <- par(mfrow = c(1, 2))
+plot(minpoly)
+polypath(minpoly, col = "grey", rule = "evenodd")
+
+## a little inconvenient, but we flip between NA-separated rings
+## and a denser encoding
+idx <- earcut(minpoly_xy, holes = hole_index)
+plot(minpoly_xy)
+jk <- apply(matrix(idx, nrow = 3), 2, function(ix) polygon(minpoly_xy[ix, ], col = "grey"))
+```
+
+<img src="man/figures/README-unnamed-chunk-1-1.png" width="100%" />
+
+``` r
+par(op)
+```
 
 The basic function `earcut` for generic data is to be called with x/y coordinates in `x` (using the `grDevices::xy.coords` conventions) and an optional marker index of where holes are.
 
@@ -30,7 +51,9 @@ rearcut:::plot_tri(x, y, ind, col = "grey")
 
 The idea is that more specialist contexts will wrap this lower level.
 
-Another example.
+More examples.
+
+A polygon data set from the Mapbox test suite.
 
 ``` r
 txt <- readLines("https://raw.githubusercontent.com/mapbox/earcut/master/test/fixtures/water-huge.json")
@@ -52,6 +75,21 @@ rearcut:::plot_tri(x$V1, x$V2, tri)
 ```
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
+
+A geographic data set, the outline and internal waters of Tasmania's main island.
+
+``` r
+taslakes_xy <- na.omit(taslakes)
+nas <- which(is.na(taslakes$x_))
+## this is the "indicate where holes start" convention
+hole_index <- nas - (seq_along(nas) - 1)
+
+idx <- earcut(taslakes_xy, holes = hole_index)
+plot(taslakes_xy, type = "n")
+jk <- apply(matrix(idx, nrow = 3), 2, function(ix) polygon(taslakes_xy[ix, ], col = "grey", border = "#00000044"))
+```
+
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
 
 Installation
 ------------
