@@ -14,9 +14,20 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
+
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/rearcut)](https://cran.r-project.org/package=rearcut)
+[![Travis-CI Build Status](http://badges.herokuapp.com/travis/hypertidy/rearcut?branch=master&env=BUILD_NAME=trusty_release&label=linux)](https://travis-ci.org/hypertidy/rearcut)
+[![Build Status](http://badges.herokuapp.com/travis/hypertidy/rearcut?branch=master&env=BUILD_NAME=osx_release&label=osx)](https://travis-ci.org/hypertidy/rearcut) 
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/hypertidy/rearcut?branch=master&svg=true)](https://ci.appveyor.com/project/hypertidy/rearcut) 
+[![Coverage status](https://codecov.io/gh/hypertidy/rearcut/branch/master/graph/badge.svg)](https://codecov.io/github/hypertidy/rearcut?branch=master)
+
+
 # rearcut
 
 The goal of rearcut is to triangulate polygons using the [Ear clipping algorithm](https://en.wikipedia.org/wiki/Polygon_triangulation#Ear_clipping_method). This is also referred to as [ear cutting](http://cgm.cs.mcgill.ca/~godfried/teaching/cg-projects/97/Ian/cutting_ears.html) and this package directly uses the [Mapbox Javascript library earcut](https://github.com/mapbox/earcut).
+
+The original motivation for rearcut is to triangulate polygons for [silicate](https://github.com/hypertidy/silicate.git). 
+
 
 A polygon and one of its possible triangulations by ear clipping. 
 
@@ -37,3 +48,33 @@ library(rearcut)
 ind <- earcut(cbind(x, y), holes = 5L)
 rearcut:::plot_tri(x, y, ind, col = "grey")
 ```
+
+The idea is that more specialist contexts will wrap this lower level. 
+
+Another example. 
+
+```{r}
+txt <- readLines("https://raw.githubusercontent.com/mapbox/earcut/master/test/fixtures/water-huge.json")
+library(dplyr)
+x <- jsonlite::fromJSON(txt) %>% purrr::map_df(tibble::as_tibble, .id = "poly")
+
+
+x <- x %>% filter(poly == 1)
+tri <- earcut(x[c("V1", "V2")])
+rearcut:::plot_tri(x$V1, x$V2, tri)
+```
+
+## Installation
+
+Rearcut may be installed from Github. 
+
+```{r,eval=FALSE}
+## install.packages("devtools")
+devtools::install_github("hypertidy/rearcut")
+```
+
+
+Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
+  By participating in this project you agree to abide by its terms.
+  
+  
