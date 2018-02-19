@@ -12,7 +12,8 @@ Roxygen: list(markdown = TRUE)
 Depends: R (>= 3.3.0)
 Imports: 
     dplyr,
-    V8
+    V8,
+    tibble
 Suggests: 
     covr,
     ggplot2,

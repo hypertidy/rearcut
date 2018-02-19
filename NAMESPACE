@@ -3,6 +3,6 @@
 S3method(earcut,default)
 export(earcut)
 importFrom(V8,v8)
-importFrom(grDevices,xy.coords)
 importFrom(graphics,plot)
 importFrom(graphics,polygon)
+importFrom(tibble,as_tibble)

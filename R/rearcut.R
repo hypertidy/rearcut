@@ -52,12 +52,21 @@ plot_tri <- function(x, y, tri, ...) {
 earcut <- function(x, holes = NULL, ...) {
   UseMethod("earcut")
 }
-#' @importFrom grDevices xy.coords
+#' @importFrom tibble as_tibble
+#'
 #' @name earcut
 #' @export
 earcut.default <- function(x, holes = NULL, ...) {
-  xy <- grDevices::xy.coords(x)
-  get_tri(xy$x, xy$y, holes = holes)
+  if (length(unlist(x)) < 6) stop("need at least 3 coordinates")
+  xy <- tibble::as_tibble(x)
+  if (!ncol(xy) == 2L) stop("need x and y coordinates in 'x'")
+
+  if (nrow(xy) < 3) stop("need at least 3 coordinates")
+  xy <- stats::setNames(xy, c("x", "y"))
+  if (any(is.na(xy$x))) stop("missing values in x")
+  if (any(is.na(xy$y))) stop("missing values in y")
+
+    get_tri(xy$x, xy$y, holes = holes)
 }
 
 
