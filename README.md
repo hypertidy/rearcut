@@ -3,9 +3,13 @@
 rearcut
 =======
 
-The goal of rearcut is to triangulate polygons for [silicate](https://github.com/hypertidy/silicate.git).
+The goal of rearcut is to triangulate polygons using the [Ear clipping algorithm](https://en.wikipedia.org/wiki/Polygon_triangulation#Ear_clipping_method). This is also referred to as [ear cutting](http://cgm.cs.mcgill.ca/~godfried/teaching/cg-projects/97/Ian/cutting_ears.html) and this package directly uses the [Mapbox Javascript library earcut](https://github.com/mapbox/earcut).
 
-The basic function `earcut` for generic data is to be called with x/y coordinates in `x` (using the `grDevices::xy.coords` convention) and an optional marker index of where holes are.
+A polygon and one of its possible triangulations by ear clipping.
+
+[silicate](https://github.com/hypertidy/silicate.git).
+
+The basic function `earcut` for generic data is to be called with x/y coordinates in `x` (using the `grDevices::xy.coords` conventions) and an optional marker index of where holes are.
 
 ``` r
 ## example data from polypath
@@ -18,6 +22,6 @@ ind <- earcut(cbind(x, y), holes = 5L)
 rearcut:::plot_tri(x, y, ind, col = "grey")
 ```
 
-<img src="man/figures/README-unnamed-chunk-1-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
 
     #> NULL

@@ -1,5 +1,7 @@
 ---
 output: github_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -14,10 +16,16 @@ knitr::opts_chunk$set(
 ```
 # rearcut
 
-The goal of rearcut is to triangulate polygons for [silicate](https://github.com/hypertidy/silicate.git). 
+The goal of rearcut is to triangulate polygons using the [Ear clipping algorithm](https://en.wikipedia.org/wiki/Polygon_triangulation#Ear_clipping_method). This is also referred to as [ear cutting](http://cgm.cs.mcgill.ca/~godfried/teaching/cg-projects/97/Ian/cutting_ears.html) and this package directly uses the [Mapbox Javascript library earcut](https://github.com/mapbox/earcut).
 
+A polygon and one of its possible triangulations by ear clipping. 
 
-The basic function `earcut` for generic data is to be called with x/y coordinates in `x` (using the `grDevices::xy.coords` convention) and an optional marker index of where holes are. 
+```{r}
+
+```
+[silicate](https://github.com/hypertidy/silicate.git). 
+
+The basic function `earcut` for generic data is to be called with x/y coordinates in `x` (using the `grDevices::xy.coords` conventions) and an optional marker index of where holes are. 
 
 ```{r}
 ## example data from polypath

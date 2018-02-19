@@ -7,10 +7,10 @@
 \alias{rearcut-package}
 \title{rearcut: Constrained Triangulation of Polygons by 'Ear Clipping (Cutting)'}
 \description{
-Constrained triangulation of polygons by direct port of the Mapbox library 'earcut'.
+Constrained triangulation of polygons by direct port of the 'Mapbox' library 'earcut'.
 
 rearcut
-R port of Mabbox earcut.
+R package wrapping the Mapbox library earcut.
 }
 \author{
 \strong{Maintainer}: Michael Sumner \email{mdsumner@gmail.com}

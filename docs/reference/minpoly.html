@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • rearcut</title>
+<title>minpoly — minpoly • rearcut</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -37,7 +37,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -73,58 +73,34 @@
       </header>
 
       <div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>
-        Reference
-        <small>version&nbsp;0.0.0.9000</small>
-      </h1>
+    <h1>minpoly</h1>
     </div>
 
-    <div class="contents">
-      <table class="ref-index">
+    
+    <p>A minimum polygon data set, with a small concavity and a single hole. The data is in 'xy.coords' form, with
+two columns for 'x_' and 'y_' values, with 'NA' rows separating separate polygon
+paths. (All but the first path are holes).</p>
+    
 
-      <colgroup>
-        <col class="alias" />
-        <col class="title" />
-      </colgroup>
+        
 
-      <tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="earcut.html">earcut</a></code> </p>
-          </td>
-          <td><p>Ear cut algorithm</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="minpoly.html">minpoly</a></code> </p>
-          </td>
-          <td><p>minpoly</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="taslakes.html">taslakes</a></code> </p>
-          </td>
-          <td><p>taslakes</p></td>
-        </tr>
-      </tbody>
-      </table>
-    </div>
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>plot</span>(<span class='no'>minpoly</span>)</div><div class='input'><span class='fu'>polypath</span>(<span class='no'>minpoly</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"grey"</span>, <span class='kw'>rule</span> <span class='kw'>=</span> <span class='st'>"evenodd"</span>)</div><div class='input'><span class='fu'>lines</span>(<span class='fu'>na.omit</span>(<span class='no'>minpoly</span>))  <span class='co'>## see the connection in the sequence</span></div><div class='img'><img src='minpoly-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'><span class='no'>nas</span> <span class='kw'>&lt;-</span> <span class='fu'>which</span>(<span class='fu'>is.na</span>(<span class='no'>minpoly</span>$<span class='no'>x_</span>))
+<span class='co'>## this is the "indicate where holes start" convention</span>
+<span class='no'>hole_index</span> <span class='kw'>&lt;-</span> <span class='no'>nas</span> - <span class='fu'>seq_along</span>(<span class='no'>nas</span>)
+<span class='no'>minpoly_xy</span> <span class='kw'>&lt;-</span> <span class='fu'>na.omit</span>(<span class='no'>minpoly</span>)
+<span class='no'>tri_index</span> <span class='kw'>&lt;-</span> <span class='fu'>earcut</span>(<span class='no'>minpoly_xy</span>, <span class='no'>hole_index</span>)
+<span class='kw pkg'>rearcut</span><span class='kw ns'>:::</span><span class='fu'>plot_tri</span>(<span class='no'>minpoly_xy</span>$<span class='no'>x_</span>, <span class='no'>minpoly_xy</span>$<span class='no'>y_</span>, <span class='no'>tri_index</span>)</div><div class='img'><img src='minpoly-2.png' alt='' width='700' height='432.632880098887' /></div><div class='output co'>#&gt; NULL</div></pre>
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+            
+      <li><a href="#examples">Examples</a></li>
     </ul>
+
   </div>
 </div>
 

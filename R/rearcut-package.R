@@ -2,68 +2,56 @@
 "_PACKAGE"
 
 #' rearcut
-#' R port of Mabbox earcut.
+#' R package wrapping the Mapbox library earcut.
 #' @name rearcut-package
 #' @docType data
 NULL
 
-
-#' @importFrom V8 v8
-load_earcut <- function() {
-  ct <- V8::v8()
-  ## load up the bunde
-  ct$source(system.file("js/earcutbundle.js", package = "rearcut"))
-  ct
-}
-
-## numbers to json
-toj <- function(x) {
-  sprintf("[%s]", paste(x, collapse = ", "))
-}
-## x,y numbers to json
-tojxy <- function(x, y) {
-  sprintf("[%s]", paste(paste(x, y, sep = ","), collapse = ", "))
-}
-## run earcut
-get_tri <- function(x, y, holes = NULL) {
-  ct <- load_earcut()
-  if (is.null(holes)) {
-    ct$eval(sprintf("var triangles = earcut(%s);", tojxy(x, y)))
-
-  } else {
-    ## convert to Js 0-based index here
-    ct$eval(sprintf("var triangles = earcut(%s, %s);", tojxy(x, y), toj(holes - 1L)))
-
-  }
-  ct$get("triangles") + 1L
-}
-#' @importFrom graphics plot polygon
-plot_tri <- function(x, y, tri, ...) {
-  xy <- cbind(x, y)
-  plot(xy, pch = ".")
-
-  apply(matrix(tri, nrow = 3), 2, function(a) polygon(xy[a, ], ...))
-}
-
-#' Ear cut algorithm
+#' minpoly
 #'
-#' Ear cutting for polygons, a method for constrained triangulation.
-#'
-#' @param x object to triangulate, any convertible to silicate PATH
-#' @param holes 1-based index indicating where hole/s begin
-#' @param ... arguments passed to methods
-#'
-#' @return index triplets of triangles from vertex pool
-#' @export
-earcut <- function(x, holes = NULL, ...) {
-  UseMethod("earcut")
-}
-#' @importFrom grDevices xy.coords
-#' @name earcut
-#' @export
-earcut.default <- function(x, holes = NULL, ...) {
-  xy <- grDevices::xy.coords(x)
-  get_tri(xy$x, xy$y, holes = holes)
-}
+#' A minimum polygon data set, with a small concavity and a single hole. The data is in 'xy.coords' form, with
+#' two columns for 'x_' and 'y_' values, with 'NA' rows separating separate polygon
+#' paths. (All but the first path are holes).
+#' @docType data
+#' @name minpoly
+#' @examples
+#' plot(minpoly)
+#' polypath(minpoly, col = "grey", rule = "evenodd")
+#' lines(na.omit(minpoly))  ## see the connection in the sequence
+#' nas <- which(is.na(minpoly$x_))
+#' ## this is the "indicate where holes start" convention
+#' hole_index <- nas - (seq_along(nas) - 1)
+#' minpoly_xy <- na.omit(minpoly)
+#' tri_index <- earcut(minpoly_xy, hole_index)
+#' rearcut:::plot_tri(minpoly_xy$x_, minpoly_xy$y_, tri_index)
+#' rearcut:::plot_tri(minpoly_xy$x_, minpoly_xy$y_, tri_index, col = "firebrick")
+NULL
 
-
+#' taslakes
+#'
+#' A polygon data set with multiple holes. The data is in 'xy.coords' form, with
+#' two columns for 'x_' and 'y_' values, with 'NA' rows separating separate polygon
+#' paths. (All but the first path are holes).
+#'
+#' This shape represents the mainland island
+#' of Tasmania with internal holes for inland waters. The coordinates are in Lambert
+#' Conformal Conic centred on 136E and 32S, with standard parallels at 17S and 47S.
+#' This shape is taken from a broader region where that local projection was suitable. The
+#' @docType data
+#' @name taslakes
+#' @examples
+#' plot(taslakes, pch = ".")
+#' lines(na.omit(taslakes))
+#' polypath(taslakes, col = "grey")
+#' tasnas <- which(is.na(taslakes$x_))
+#' ## this is the "indicate where holes start" convention
+#' hole_index <- tasnas - (seq_along(tasnas)-1)
+#' taslakes_xy <- na.omit(taslakes)
+#' tri_index <- earcut(taslakes_xy, hole_index)
+#' rearcut:::plot_tri(taslakes_xy$x_, taslakes_xy$y_, tri_index)
+#' rearcut:::plot_tri(taslakes_xy$x_, taslakes_xy$y_, tri_index, col = "grey")
+#' \dontrun{
+#' library(ggplot2)
+#' taslakes_xy[tri_index, ] %>% mutate(g = (row_number() -1) %/% 3 ) %>% group_by(g) %>% ggplot(aes(x_, y_,  group = g)) + geom_path()
+#' }
+NULL

@@ -59,16 +59,18 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#rearcut" class="anchor"></a>rearcut</h1></div>
 
-<p>The basic function <code>earcut</code> for generic data is to be called with x/y coordinates in <code>x</code> (using the <code><a href="http://www.rdocumentation.org/packages/grDevices/topics/xy.coords">grDevices::xy.coords</a></code> convention) and an optional marker index of where holes are.</p>
+<p>A polygon and one of its possible triangulations by ear clipping.</p>
+<p><a href="https://github.com/hypertidy/silicate.git">silicate</a>.</p>
+<p>The basic function <code>earcut</code> for generic data is to be called with x/y coordinates in <code>x</code> (using the <code><a href="http://www.rdocumentation.org/packages/grDevices/topics/xy.coords">grDevices::xy.coords</a></code> conventions) and an optional marker index of where holes are.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## example data from polypath
 ## rather than separate rings by NA we indicate those positions
 ## (here the hole starts at 5 and is the only one)
-x &lt;-<span class="st"> </span><span class="kw">c</span>(.<span class="dv">1</span>, .<span class="dv">1</span>, .<span class="dv">9</span>, .<span class="dv">9</span>, .<span class="dv">2</span>, .<span class="dv">2</span>, .<span class="dv">8</span>, .<span class="dv">8</span>)
-y &lt;-<span class="st"> </span><span class="kw">c</span>(.<span class="dv">1</span>, .<span class="dv">9</span>, .<span class="dv">9</span>, .<span class="dv">1</span>, .<span class="dv">2</span>, .<span class="dv">8</span>, .<span class="dv">8</span>, .<span class="dv">2</span>)
+x &lt;-<span class="st"> </span><span class="kw">c</span>(.<span class="dv">1</span>, <span class="fl">.1</span>, <span class="fl">.9</span>, <span class="fl">.9</span>, <span class="fl">.2</span>, <span class="fl">.2</span>, <span class="fl">.8</span>, <span class="fl">.8</span>)
+y &lt;-<span class="st"> </span><span class="kw">c</span>(.<span class="dv">1</span>, <span class="fl">.9</span>, <span class="fl">.9</span>, <span class="fl">.1</span>, <span class="fl">.2</span>, <span class="fl">.8</span>, <span class="fl">.8</span>, <span class="fl">.2</span>)
 <span class="kw">library</span>(rearcut)
 ind &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/rearcut/topics/earcut">earcut</a></span>(<span class="kw">cbind</span>(x, y), <span class="dt">holes =</span> 5L)
 rearcut<span class="op">:::</span><span class="kw">plot_tri</span>(x, y, ind, <span class="dt">col =</span> <span class="st">"grey"</span>)</code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-1-1.png" width="100%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-2-1.png" width="100%"></p>
 <pre><code>#&gt; NULL</code></pre>
 </div>
 </div>
@@ -84,7 +86,9 @@ rearcut<span class="op">:::</span><span class="kw">plot_tri</span>(x, y, ind, <s
 </ul>
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/hypertidy/silicate.git">silicate</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Polygon_triangulation#Ear_clipping_method">Ear clipping algorithm</a></li>
+<li><a href="http://cgm.cs.mcgill.ca/~godfried/teaching/cg-projects/97/Ian/cutting_ears.html">ear cutting</a></li>
+<li><a href="https://github.com/mapbox/earcut">Mapbox Javascript library earcut</a></li>
 </ul>
 </div>
 
