@@ -52,6 +52,7 @@ NULL
 #' rearcut:::plot_tri(taslakes_xy$x_, taslakes_xy$y_, tri_index, col = "grey")
 #' \dontrun{
 #' library(ggplot2)
-#' taslakes_xy[tri_index, ] %>% mutate(g = (row_number() -1) %/% 3 ) %>% group_by(g) %>% ggplot(aes(x_, y_,  group = g)) + geom_path()
+#' d <- taslakes_xy[tri_index, ] %>% mutate(g = (row_number() -1) %/% 3 ) %>% group_by(g)
+#' ggplot(d, aes(x_, y_,  group = g)) + geom_path()
 #' }
 NULL

@@ -1,7 +1,7 @@
 Package: rearcut
 Version: 0.1.0
 Title: Constrained Triangulation of Polygons by 'Ear Clipping/Cutting'
-Description: Constrained triangulation of polygons implemented by the Mapbox Javascript library 'earcut'.
+Description: Constrained triangulation of polygons implemented by the 'Mapbox' 'Javascript' library 'earcut'.
 Authors@R: person("Michael", "Sumner", email = "mdsumner@gmail.com", role = c("aut", "cre"))
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -15,4 +15,5 @@ Imports:
     V8
 Suggests: 
     covr,
+    ggplot2,
     testthat

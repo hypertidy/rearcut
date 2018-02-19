@@ -7,7 +7,7 @@
 \alias{rearcut-package}
 \title{rearcut: Constrained Triangulation of Polygons by 'Ear Clipping/Cutting'}
 \description{
-Constrained triangulation of polygons implemented by the Mapbox Javascript library 'earcut'.
+Constrained triangulation of polygons implemented by the 'Mapbox' 'Javascript' library 'earcut'.
 
 rearcut
 R package wrapping the Mapbox library earcut.
